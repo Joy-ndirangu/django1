@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <br><br>
+
+            <h2 class="p-3">Students</h2>
+
+            {% for message in messages %}
+
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            {% endfor %}
+
+                <table class="table " >
+  <thead>
+    <tr >
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+        <th scope="col">Image</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for student in data %}
+  <tr>
+      <th scope="row">{{ student.id }}</th>
+      <td>{{ student.name }}</td>
+      <td>{{ student.email }}</td>
+      <td>{{ student.phone }}</td>
+        <td>
+            <img src="http://127.0.0.1:8000/media/{{ student.image }}" alt="{{ student.name }}" width="50">
+        </td>
+        <td>
+            <a href="/edit/{{ student.id }}" class="btn btn-warning">Edit</a>
+        </td>
+        <td>
+            <a href="/delete/{{ student.id }}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+  {% endfor %}
+
+
+  </tbody>
+</table>
+                <br><br>
+
+            <h2>Students - Grid </h2>
+            <div class="row">
+                {% for student in data %}
+
+                    <div class="col-md-3 " >
+
+                    <div class="card">
+                        <img src="http://127.0.0.1:8000/media/{{ student.image }}" class="card-img-top " alt="{{ student.name }} " >
+                        <div class="card-body">
+                            <h5 class="card-title">{{ student.name }}</h5>
+                            <p class="card-text"> {{ student.email }}</p>
+
+                        </div>
+                    </div>
+
+                    </div>
+
+                {% endfor %}
+
+
+
+
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
