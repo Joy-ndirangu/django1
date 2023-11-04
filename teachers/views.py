@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Students, Sliders
 
+from django.http import HttpResponse
+
 #for alerts import
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -23,10 +26,21 @@ def add(request):
     return render(request, "add.html", {'navbar': 'add'})
 
 
-def viewdata(request):
+#def viewdata(request):
     # retrieving data from db and storing it in a variable . lets call the variable data
-    data = Students.objects.all()
+    #data = Students.objects.all()
+    #return render(request, "viewdata.html", {'navbar': 'viewdata', 'data': data})
+
+#adding paginations
+def viewdata(request):
+    #getting all items and specifying how many items should be there per page and storing them in a variable calle dpaginate
+    paginate = Paginator(Students.objects.all(),2)
+    page = request.GET.get('page')
+    data = paginate.get_page(page)
     return render(request, "viewdata.html", {'navbar': 'viewdata', 'data': data})
+
+
+
 
 
 def delete(request, id):
@@ -111,7 +125,8 @@ def sliders(request):
 #searching in django
 def search(request):
     if request.method =='GET':
+        # argument passed to get method should  be the same as the input field name
         query = request.GET.get('query')
         if query:
             student = Students.objects.filter(name__icontains=query)
-            return render(request,'search.html',{'student':student})
+            return render(request,'search.html',{'data':student}) # in the context the key should be the same name as the variable name used to loop while viewing the data in the database. Check for loop in html file

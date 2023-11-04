@@ -26,35 +26,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a  class="nav-link" href="{% url 'teachers:home' %}">Home</a>
+        <li class="nav-item {% if navbar == 'home' %} active {% endif %}">
+          <a  class="nav-link"  href="{% url 'teachers:home' %}">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {% if navbar == 'about' %} active {% endif %}">
           <a class="nav-link" href="{% url 'teachers:about' %}">About</a>
          </li>
-        <li class="nav-item">
+        <li class="nav-item {% if navbar == 'contact' %} active {% endif %}">
           <a class="nav-link" href="{% url 'teachers:contact' %}">Contact</a>
         </li>
 
-         <li class="nav-item">
+         <li class="nav-item {% if navbar == 'addData' %} active {% endif %}">
           <a class="nav-link" href="{% url 'teachers:addData' %}">Add Data</a>
         </li>
 
-         <li class="nav-item">
+         <li class="nav-item {% if navbar == 'viewdata' %} active {% endif %}">
           <a class="nav-link" href="{% url 'teachers:viewdata' %}">View Data</a>
         </li>
 
-         <li class="nav-item">
-          <a class="nav-link" href="{% url 'settings:home' %}">Settings</a>
+         <li class="nav-item {% if navbar == 'settings' %} active {% endif %}">
+          <a class="nav-link" href="{% url 'settings:settings' %}">Settings</a>
         </li>
 
-          <li class="nav-item">
+          <li class="nav-item {% if navbar == 'sliders' %} active {% endif %}">
           <a class="nav-link" href="{% url 'teachers:sliders' %}">Sliders</a>
         </li>
 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" role="search" method="get" action="{% url 'teachers:search' %}" >
+        <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>

@@ -11,6 +11,7 @@ urlpatterns = [
     path('delete/<id>',views.delete, name="delete"),
     path('insert/', views.insertdata, name="insertdata"),
     path('edit/<id>', views.edit, name="edit"),
-    path('sliders/',views.sliders, name="sliders")
+    path('sliders/',views.sliders, name="sliders"),
+    path('search/', views.search, name="search")
 
 ]
