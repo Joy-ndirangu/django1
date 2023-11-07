@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Students, Sliders
+from .models import Students, Sliders, CustomUser
 
 from django.http import HttpResponse
 
@@ -7,6 +7,14 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.core.paginator import Paginator
 
+
+#imports for class based views . Useraccounts and authentication
+from django.views.generic import CreateView
+from . form import  CustomUserCreationForm, CustomUserChangeForm
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -130,3 +138,14 @@ def search(request):
         if query:
             student = Students.objects.filter(name__icontains=query)
             return render(request,'search.html',{'data':student}) # in the context the key should be the same name as the variable name used to loop while viewing the data in the database. Check for loop in html file
+
+
+class SignUpview(CreateView):
+    model = CustomUser
+    form_class = CustomUserCreationForm
+    # specifies path to be redirected to after successful registration
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
+
+class Userlogin(LoginView):
+    template_name = 'login.html'

@@ -81,7 +81,7 @@
 
             {% endfor %}
 
-          {% if student.has_next %}
+          {% if data.has_next %}
 
                 <li class="page-item"><a class="page-link" href="?page={{ data.next_page_number }}">Next</a></li>
                 <li class="page-item"><a class="page-link" href="?page={{ data.paginator.num_pages }}">Last &raquo</a></li>

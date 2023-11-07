@@ -12,6 +12,9 @@ urlpatterns = [
     path('insert/', views.insertdata, name="insertdata"),
     path('edit/<id>', views.edit, name="edit"),
     path('sliders/',views.sliders, name="sliders"),
-    path('search/', views.search, name="search")
+    path('search/', views.search, name="search"),
+    # path for class based views:
+    path('register/', views.SignUpview.as_view(), name='register'),
+    path('login/', views.Userlogin.as_view(), name="login")
 
 ]

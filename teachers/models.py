@@ -1,5 +1,8 @@
 from django.db import models
 
+#for user accounts and authentication:
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 
@@ -20,6 +23,13 @@ class Sliders(models.Model):
 
     def __str__(self):
         return self.text
+
+
+
+#custom class for user registration
+#A
+class CustomUser(AbstractUser):
+    year = models.PositiveIntegerField(blank=True, null=True)
 
 
 
